@@ -6,7 +6,7 @@
 
 - [x] Node.js
 - [x] Fastify
-- [ ] ES6 (Babel)
+- [x] ES6 (Babel)
 
 ## 기능
 
