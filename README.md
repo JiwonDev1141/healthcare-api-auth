@@ -1,12 +1,13 @@
-# 헬스케어 Auth API 프로토타입
+# 헬스케어 Admin - Auth API 프로토타입
 
 - 미르 메타케어, 제주 한의원, 제주 해녀 프로젝트를 포함하는 플랫폼 API의 Authentication Part 입니다.
 
-## Tech Stack
+## 🛠 Tech Stack
 
 - [x] Node.js
 - [x] Fastify
 - [x] ES6 (Babel)
+- [ ] JWT
 
 ## 기능
 

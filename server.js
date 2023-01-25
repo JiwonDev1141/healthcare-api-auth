@@ -1,5 +1,5 @@
 import Fastify from 'fastify';
-import router from './first-route';
+import router from './routers/globalRouter/first-route';
 
 // Require the framework and instantiate it
 const fastify = Fastify({ logger: true });
