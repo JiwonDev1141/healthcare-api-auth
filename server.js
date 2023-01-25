@@ -1,10 +1,14 @@
 import Fastify from 'fastify';
-import router from './routers/globalRouter/first-route';
+import router from './routers/authRouter';
+import fastifyJwt from '@fastify/jwt';
 
 // Require the framework and instantiate it
 const fastify = Fastify({ logger: true });
 
 fastify.register(router);
+fastify.register(fastifyJwt, {
+  secret: 'supersecret'
+});
 
 // Run the server!
 const start = async () => {
