@@ -1,9 +1,14 @@
-async function routes (fastify, options) {
-    fastify.post('/user', async (request, payload, reply) => {
-        console.log(payload)
-        const token = fastify.jwt.sign({ payload });
-        reply.send({ token });
-    })
+import { postJoin, verifyJwt } from "../controllers/authController";
+
+async function routes(fastify, options) {
+
+    // 회원가입 요청 API (Post)
+    fastify.post('/user', postJoin);
+
+    // 로그인한 유저가 요청 시 토큰 유효성 검증
+    fastify.addHook("onRequest", verifyJwt);
+
+
 }
 
 
