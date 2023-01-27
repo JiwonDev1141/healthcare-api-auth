@@ -7,6 +7,7 @@
 - [x] Node.js
 - [x] Fastify
 - [x] ES6 (Babel)
+- [x] MongoDB
 - [ ] JWT
 
 ## 기능
