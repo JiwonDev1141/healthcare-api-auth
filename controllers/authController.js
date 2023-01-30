@@ -1,6 +1,10 @@
 import fastify from "fastify";
 
-export const postJoin = async (request, payload, reply) => {
+export const createAccount = async (request, payload, reply) => {
+
+}
+
+export const postLogin = async (request, payload, reply) => {
     try {
         console.log(payload)
     
@@ -21,8 +25,3 @@ export const verifyJwt = async (request, reply) => {
         reply.send(err);
     }
 };
-
-export const postLogin = async (request, reply) => {
-    const token = fastify.jwt.get();
-   
-}

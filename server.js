@@ -3,6 +3,7 @@ import router from './routers/authRouter';
 import fastifyJwt from '@fastify/jwt';
 import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
+import fastifyHelmet from '@fastify/helmet';
 
 dotenv.config();
 
@@ -13,6 +14,8 @@ fastify.register(router);
 fastify.register(fastifyJwt, {
   secret: 'supersecret'
 });
+// 기본 보안을 위한 설정: https://www.npmjs.com/package/helmet
+fastify.register(fastifyHelmet);
 
 
 
@@ -26,7 +29,6 @@ const dbInit = async () => {
   try {
     await mongoClient.connect();
     console.log("\x1b[33m MongoDB Connected! \x1b[0m");
-    
   }
   catch (err) {
     console.log("mongoDB: " + err);
@@ -41,8 +43,8 @@ const start = async () => {
     fastify.listen({ port: PORT });
 
   } catch (err) {
-    fastify.log.error(err)
-    process.exit(1)
+    fastify.log.error(err);
+    process.exit(1);
   }
 }
 
