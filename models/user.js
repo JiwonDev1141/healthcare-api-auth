@@ -1,5 +1,9 @@
 import Joi from "joi"
 
+const group = Joi.object().keys({
+    groupName: Joi.string().required()
+})
+
 const userSchema = Joi.object({
     userId: Joi.string(),
     userIndex: Joi.number.required(),
@@ -27,7 +31,7 @@ const userSchema = Joi.object({
     companyCode: Joi.string(),
     serviceId: Joi.string(), // ObjectId
     serviceCode: Joi.string(),
-    group: Joi.array(), // array<objectId> 어떻게 설정하는 지?
+    groups: Joi.array().ordered(group), // array<objectId> 어떻게 설정하는 지?
     userPhoto: Joi.string().required(),
     use: Joi.boolean().required(),
 

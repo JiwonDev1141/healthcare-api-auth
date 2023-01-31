@@ -4,19 +4,29 @@ import fastifyJwt from '@fastify/jwt';
 import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 import fastifyHelmet from '@fastify/helmet';
+import cors from "@fastify/cors";
 
+// 환경변수 (.env) 세팅
 dotenv.config();
 
 // Require the framework and instantiate it
 const fastify = Fastify({ logger: true });
 
-fastify.register(router);
+// cors + fastify 라우터 세팅
+const setRouters = async () => {
+  await fastify.register(cors, {
+
+  });
+  fastify.register(router);
+}
+setRouters();
+
 fastify.register(fastifyJwt, {
   secret: 'supersecret'
 });
+
 // 기본 보안을 위한 설정: https://www.npmjs.com/package/helmet
 fastify.register(fastifyHelmet);
-
 
 
 const { PORT, MONGO_URI } = process.env;
@@ -24,6 +34,8 @@ const { PORT, MONGO_URI } = process.env;
 
 // MongoDB 기본 세팅
 const mongoClient = new MongoClient(MONGO_URI);
+
+
 
 const dbInit = async () => {
   try {
