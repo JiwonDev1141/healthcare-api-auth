@@ -5,6 +5,7 @@ import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 import fastifyHelmet from '@fastify/helmet';
 import cors from "@fastify/cors";
+import mongoose from "mongoose";
 
 // 환경변수 (.env) 세팅
 dotenv.config();
@@ -33,26 +34,18 @@ const { PORT, MONGO_URI } = process.env;
 
 
 // MongoDB 기본 세팅
-const mongoClient = new MongoClient(MONGO_URI);
+// export const mongoClient = new MongoClient(MONGO_URI);
 
 
-
-const dbInit = async () => {
-  try {
-    await mongoClient.connect();
-    console.log("\x1b[33m MongoDB Connected! \x1b[0m");
-  }
-  catch (err) {
-    console.log("mongoDB: " + err);
-  }
-}
 /////
 
 // Run the server!
 const start = async () => {
   try {
-    await dbInit();
-    fastify.listen({ port: PORT });
+    mongoose.connect(MONGO_URI).then(() => {
+      console.log("\x1b[33m MongoDB Connected! \x1b[0m");
+      fastify.listen({ port: PORT });
+    })
 
   } catch (err) {
     fastify.log.error(err);
