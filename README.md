@@ -8,7 +8,8 @@
 - [x] Fastify
 - [x] ES6 (Babel)
 - [x] MongoDB
-- [ ] JWT
+- [x] Mongoose
+- [x] JWT
 
 ## 기능
 
@@ -16,7 +17,7 @@
 ### 공통
 
 - [ ] 로그인
-- [ ] 회원 가입
+- [x] 회원 가입
 - [ ] 비밀번호 찾기
 - [ ] 회원 탈퇴
 - [ ] User Role

@@ -1,11 +1,21 @@
 import fastify from "fastify";
 import userModel from "../models/user";
+import bcrypt from "bcrypt";
 
 
 export const createAccount = async (request, payload, reply) => {
     console.log(request.body);
     // console.log(payload);
-    const { email, username, password } = request.body;
+    const { email, username, password, password2 } = request.body;
+
+    if(password !== password2) {
+        return {
+            ok: false,
+            error: "비밀번호가 다릅니다.",
+            status: 400
+        }
+    }
+    
 
     const user = await userModel.findOne({
         email,
@@ -21,11 +31,20 @@ export const createAccount = async (request, payload, reply) => {
     }
 
     if (!user) {
+        // 새로운 계정 생성
+        
+        // 비밀번호 salt & hash 처리
+        const saltRounds = 10;
+
+        const salt = await bcrypt.genSalt(saltRounds);
+        const hashed = await bcrypt.hash(password, salt);
+
         const result = await userModel.create({
             email,
             username,
-            password
+            password: hashed
         });
+        
         console.log(result);
 
         if (result) {

@@ -3,7 +3,7 @@ import { createAccount, postLogin, verifyJwt } from "../controllers/authControll
 async function routes(fastify, options) {
     
     // 회원가입 요청 API (Post)
-    fastify.post('/user', createAccount);
+    fastify.post('/sign-up', createAccount);
 
     // 로그인한 유저가 요청 시 토큰 유효성 검증
     // fastify.addHook("onRequest", verifyJwt);
